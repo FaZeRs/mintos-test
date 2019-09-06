@@ -1,4 +1,8 @@
-const mix = require('laravel-mix');
+const cssImport = require('postcss-import')
+const cssNesting = require('postcss-nesting')
+const mix = require('laravel-mix')
+const path = require('path')
+const tailwindcss = require('tailwindcss')
 
 /*
  |--------------------------------------------------------------------------
@@ -12,4 +16,22 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+    .postCss('resources/css/app.css', 'public/css', [
+        cssImport(),
+        cssNesting(),
+        tailwindcss('tailwind.js'),
+    ])
+    .webpackConfig({
+        output: { chunkFilename: 'js/[name].js?id=[chunkhash]' },
+        resolve: {
+            alias: {
+                'vue$': 'vue/dist/vue.runtime.esm.js',
+                '@': path.resolve('resources/js'),
+            },
+        },
+    })
+    .babelConfig({
+        plugins: ['@babel/plugin-syntax-dynamic-import'],
+    })
+    .version()
+    .sourceMaps()
