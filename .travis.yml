@@ -26,7 +26,13 @@ cache:
     - vendor
     - node_modules
 
-before_script:
+before_install:
+  - mysql -e 'CREATE DATABASE homestead;'
+  - travis_retry composer self-update && composer --version
+  - nvm install --lts
+  - npm i -g yarn
+
+install:
   - cp .env.travis.example .env
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - php artisan key:generate
@@ -35,13 +41,14 @@ before_script:
   - yarn install --silent --non-interactive
   - yarn production
 
-before_install:
-  - mysql -e 'CREATE DATABASE homestead;'
-  - travis_retry composer self-update && composer --version
-  - nvm install --lts
-  - npm i -g yarn
+before_script:
+  - google-chrome-stable --version
+  - php artisan dusk:chrome-driver
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - php artisan serve &
 
 script:
+  - php artisan dusk
   - phpunit
 
 notifications:
