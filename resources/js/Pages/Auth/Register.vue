@@ -48,11 +48,20 @@
         mounted() {
             document.title = 'Register | Mintos'
         },
+        watch: {
+            'form.email': function(newVal, oldVal) {
+                const regex = /\S+@\S+\.\S+/;
+                if(regex.test(newVal)) {
+                    this.$inertia.post(this.route('validate.email'), { email: newVal })
+                }
+            },
+        },
         methods: {
             submit() {
                 this.sending = true
                 this.$inertia.post(this.route('register.post'), this.form).then(() => this.sending = false)
             },
         },
+
     }
 </script>
