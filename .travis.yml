@@ -1,0 +1,46 @@
+language: php
+
+php:
+  - 7.2
+  - 7.3
+
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+
+dist: trusty
+
+sudo: required
+
+branches:
+  only:
+    - master
+    - develop
+
+cache:
+  directories:
+    - vendor
+    - node_modules
+
+before_script:
+  - cp .env.travis.example .env
+  - composer self-update
+  - composer install --no-progress --no-interaction --prefer-source --no-suggest
+  - php artisan key:generate
+  - php artisan telescope:install
+  - php artisan migrate
+
+before_install:
+  - mysql -e 'CREATE DATABASE homestead;'
+
+script:
+  - composer test
+
+notifications:
+  email: false
