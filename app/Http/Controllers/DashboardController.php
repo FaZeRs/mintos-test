@@ -28,8 +28,110 @@ class DashboardController extends Controller
             ];
         });
 
+        $popularWords = [];
+        $ignoredWords = $this->ignoredWords();
+        foreach($feedItems as $item) {
+            $string = $item['description'];
+            $words = $this->most_frequent_words($string, $ignoredWords, str_word_count($string));
+            foreach($words as $i => $k){
+                if(isset($popularWords[$i])) {
+                    $popularWords[$i] += $k;
+                } else {
+                    $popularWords[$i] = $k;
+                }
+            }
+        }
+        arsort($popularWords);
+
         return Inertia::render('Dashboard/Index', [
-            'feedItems' => $feedItems
+            'feedItems' => $feedItems,
+            'popularWords' => array_slice($popularWords, 0, 11),
         ]);
+    }
+
+    protected function most_frequent_words($string, $stop_words = [], $limit = 10) {
+        $string = strtolower($string); // Make string lowercase
+
+        $words = str_word_count($string, 1); // Returns an array containing all the words found inside the string
+        $words = array_diff($words, $stop_words); // Remove black-list words from the array
+        $words = array_count_values($words); // Count the number of occurrence
+
+        arsort($words); // Sort based on count
+
+        return array_slice($words, 0, $limit); // Limit the number of words and returns the word array
+    }
+
+    protected function ignoredWords(): array
+    {
+//         Get 50 most common words
+//        $html = view()->make('https://en.wikipedia.org/wiki/Most_common_words_in_English')->render();
+//        $html = file_get_contents('https://en.wikipedia.org/wiki/Most_common_words_in_English');
+//        $dom = new \DOMDocument;
+//        $dom->loadHTML($html);
+//        $dom->preserveWhiteSpace = false;
+//        $tables = $dom->getElementsByTagName('table');
+//        $rows = $tables->item(0)->getElementsByTagName('tr');
+//        $records = collect($rows)->slice(0, 51)->all();
+//        $array = [];
+//        foreach ($records as $row) {
+//            $cols = $row->getElementsByTagName('td');
+//            if ($cols->item(0)) {
+//                $array[] = $cols->item(0)->nodeValue;
+//            }
+//        }
+//        dd($array);
+
+        return [
+            "the",
+            "be",
+            "to",
+            "of",
+            "and",
+            "a",
+            "in",
+            "that",
+            "have",
+            "I",
+            "it",
+            "for",
+            "not",
+            "on",
+            "with",
+            "he",
+            "as",
+            "you",
+            "do",
+            "at",
+            "this",
+            "but",
+            "his",
+            "by",
+            "from",
+            "they",
+            "we",
+            "say",
+            "her",
+            "she",
+            "or",
+            "an",
+            "will",
+            "my",
+            "one",
+            "all",
+            "would",
+            "there",
+            "their",
+            "what",
+            "so",
+            "up",
+            "out",
+            "if",
+            "about",
+            "who",
+            "get",
+            "which",
+            "go",
+            "me",
+        ];
     }
 }
