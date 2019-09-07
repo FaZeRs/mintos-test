@@ -32,7 +32,7 @@ before_script:
   - php artisan key:generate
   - php artisan telescope:install
   - php artisan migrate
-  - npm install --no-audit --no-progress --quiet
+  - yarn install --silent --non-interactive
   - yarn production
 
 before_install:
