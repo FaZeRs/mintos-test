@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (config('database.connections.mysql.charset') === 'utf8mb4') {
+            Schema::defaultStringLength(191);
+        }
         Date::use(CarbonImmutable::class);
     }
 
