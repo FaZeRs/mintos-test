@@ -33,7 +33,7 @@ before_script:
   - php artisan telescope:install
   - php artisan migrate
   - npm install --no-audit --no-progress --quiet
-  - npm run production
+  - yarn production
 
 before_install:
   - mysql -e 'CREATE DATABASE homestead;'
