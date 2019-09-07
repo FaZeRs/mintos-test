@@ -42,7 +42,7 @@ before_install:
   - npm i -g yarn
 
 script:
-  - composer test
+  - phpunit
 
 notifications:
   email: false
