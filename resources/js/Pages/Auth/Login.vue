@@ -1,6 +1,6 @@
 <template>
-    <div class="p-6 bg-indigo-darker min-h-screen flex justify-center items-center">
-        <div class="w-full max-w-sm">
+    <div class="p-6 bg-indigo-800 min-h-screen flex justify-center items-center">
+        <div class="w-full max-w-md">
             <logo class="block mx-auto w-full max-w-xs fill-white" height="100" />
             <form class="mt-8 bg-white rounded-lg shadow-lg overflow-hidden" @submit.prevent="submit">
                 <div class="px-10 py-12">
@@ -13,9 +13,9 @@
                         <span class="text-sm">Remember Me</span>
                     </label>
                 </div>
-                <div class="px-10 py-4 bg-grey-lightest border-t border-grey-lighter flex justify-between items-center">
+                <div class="px-10 py-4 bg-gray-100 border-t border-gray-200 flex justify-between items-center">
                     <inertia-link class="hover:underline" tabindex="-1" :href="route('register')">Register</inertia-link>
-                    <loading-button :loading="sending" class="btn-indigo" type="submit">Login</loading-button>
+                    <loading-button :loading="sending" class="btn-indigo-500" type="submit">Login</loading-button>
                 </div>
             </form>
         </div>

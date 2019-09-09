@@ -4,7 +4,7 @@
         <section class="flex">
             <div class="p-2" v-for="(count, word) in popularWords" :key="word">
                 <div class="inline-flex items-center bg-white leading-none text-purple-dark rounded-full p-2 shadow text-teal text-sm">
-                    <span class="inline-flex bg-indigo-dark text-white rounded-full h-6 px-3 justify-center items-center">{{ count }}</span>
+                    <span class="inline-flex bg-indigo-600 text-white rounded-full h-6 px-3 justify-center items-center">{{ count }}</span>
                     <span class="inline-flex px-2">{{ word }}</span>
                 </div>
             </div>
