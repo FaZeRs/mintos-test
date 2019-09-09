@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use SimplePie;
 use Carbon\Carbon;
 use Inertia\Inertia;
-use SimplePie;
 
 class DashboardController extends Controller
 {
@@ -30,11 +30,11 @@ class DashboardController extends Controller
 
         $popularWords = [];
         $ignoredWords = $this->ignoredWords();
-        foreach($feedItems as $item) {
+        foreach ($feedItems as $item) {
             $string = $item['description'];
             $words = $this->most_frequent_words($string, $ignoredWords, str_word_count($string));
-            foreach($words as $i => $k){
-                if(isset($popularWords[$i])) {
+            foreach ($words as $i => $k) {
+                if (isset($popularWords[$i])) {
                     $popularWords[$i] += $k;
                 } else {
                     $popularWords[$i] = $k;
@@ -49,7 +49,8 @@ class DashboardController extends Controller
         ]);
     }
 
-    protected function most_frequent_words($string, $stop_words = [], $limit = 10) {
+    protected function most_frequent_words($string, $stop_words = [], $limit = 10)
+    {
         $string = strtolower($string); // Make string lowercase
 
         $words = str_word_count($string, 1); // Returns an array containing all the words found inside the string
@@ -82,56 +83,56 @@ class DashboardController extends Controller
 //        dd($array);
 
         return [
-            "the",
-            "be",
-            "to",
-            "of",
-            "and",
-            "a",
-            "in",
-            "that",
-            "have",
-            "I",
-            "it",
-            "for",
-            "not",
-            "on",
-            "with",
-            "he",
-            "as",
-            "you",
-            "do",
-            "at",
-            "this",
-            "but",
-            "his",
-            "by",
-            "from",
-            "they",
-            "we",
-            "say",
-            "her",
-            "she",
-            "or",
-            "an",
-            "will",
-            "my",
-            "one",
-            "all",
-            "would",
-            "there",
-            "their",
-            "what",
-            "so",
-            "up",
-            "out",
-            "if",
-            "about",
-            "who",
-            "get",
-            "which",
-            "go",
-            "me",
+            'the',
+            'be',
+            'to',
+            'of',
+            'and',
+            'a',
+            'in',
+            'that',
+            'have',
+            'I',
+            'it',
+            'for',
+            'not',
+            'on',
+            'with',
+            'he',
+            'as',
+            'you',
+            'do',
+            'at',
+            'this',
+            'but',
+            'his',
+            'by',
+            'from',
+            'they',
+            'we',
+            'say',
+            'her',
+            'she',
+            'or',
+            'an',
+            'will',
+            'my',
+            'one',
+            'all',
+            'would',
+            'there',
+            'their',
+            'what',
+            'so',
+            'up',
+            'out',
+            'if',
+            'about',
+            'who',
+            'get',
+            'which',
+            'go',
+            'me',
         ];
     }
 }
