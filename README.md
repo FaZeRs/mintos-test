@@ -1,8 +1,8 @@
-# Mintos test
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Installing
-
-A step by step series of examples that tell you have to get a development env running
 
 Clone this repository
 ```
@@ -38,3 +38,18 @@ The application will be available on http://localhost:8000
 ```
 composer test
 ```
+
+## Built With
+
+* [Laravel](https://laravel.com/)
+* [Vue](https://vuejs.org)
+* [Inertia.js](https://inertiajs.com/)
+* [Docker](https://www.docker.com/)
+
+## Authors
+
+* **Nauris Linde** - *Initial work* - [FaZeRs](https://github.com/FaZeRs)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
