@@ -7,9 +7,6 @@ php:
 services:
   - mysql
 
-addons:
-  chrome: stable
-
 dist: trusty
 
 sudo: required
@@ -30,7 +27,7 @@ before_install:
   - mysql -e 'CREATE DATABASE homestead;'
   - travis_retry composer self-update && composer --version
   - nvm install --lts
-  - npm i -g yarn
+  - npm i -g npm
 
 install:
   - cp .env.travis.example .env
@@ -38,14 +35,8 @@ install:
   - php artisan key:generate
   - php artisan telescope:install
   - php artisan migrate
-  - yarn install --silent --non-interactive
-  - yarn production
-
-before_script:
-  - google-chrome-stable --version
-  - php artisan dusk:chrome-driver
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-  - php artisan serve &
+  - npm install --silent --non-interactive
+  - npm run production
 
 script:
   - composer test

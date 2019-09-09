@@ -45,7 +45,7 @@ class DashboardController extends Controller
 
         return Inertia::render('Dashboard/Index', [
             'feedItems' => $feedItems,
-            'popularWords' => array_slice($popularWords, 0, 11),
+            'popularWords' => array_slice($popularWords, 0, 10),
         ]);
     }
 
