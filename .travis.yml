@@ -48,8 +48,7 @@ before_script:
   - php artisan serve &
 
 script:
-  - php artisan dusk
-  - phpunit
+  - composer test
 
 notifications:
   email: false
