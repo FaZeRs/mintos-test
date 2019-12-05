@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use SimplePie;
 use Carbon\Carbon;
 use Inertia\Inertia;
+use SimplePie;
 
 class DashboardController extends Controller
 {
